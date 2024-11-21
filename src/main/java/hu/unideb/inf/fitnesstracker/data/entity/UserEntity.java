@@ -16,6 +16,8 @@ public class UserEntity {
     private String address;
     @Column(name="phone")
     private String phone;
+    @Column(name="role_id")
+    private int roleId;
 
 
     public UserEntity() {
