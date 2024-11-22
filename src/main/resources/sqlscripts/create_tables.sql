@@ -8,7 +8,8 @@ CREATE TABLE users (
     );
 
 CREATE TABLE food (
-    food_name VARCHAR(500) not null primary key,
+    id not null primary key,
+    food_name VARCHAR(500) unique not null,
     kcal INT,
     protein INT,
     fat INT,

@@ -2,11 +2,16 @@ package hu.unideb.inf.fitnesstracker.data.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "food")
 public class FoodEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @Column(name="food_name")
     private String foodName;
 
@@ -33,6 +38,13 @@ public class FoodEntity {
         this.carbohydrates = carbohydrates;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFoodName() {
         return foodName;
@@ -72,5 +84,18 @@ public class FoodEntity {
 
     public void setCarbohydrates(int carbohydrates) {
         this.carbohydrates = carbohydrates;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FoodEntity that = (FoodEntity) o;
+        return Objects.equals(foodName, that.foodName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(foodName);
     }
 }

@@ -23,6 +23,15 @@ public class UserEntity {
     public UserEntity() {
     }
 
+    public UserEntity(int id, String name, String emailAddress, String address, String phone, int roleId) {
+        this.id = id;
+        this.name = name;
+        this.emailAddress = emailAddress;
+        this.address = address;
+        this.phone = phone;
+        this.roleId = roleId;
+    }
+
     public int getId() {
         return id;
     }
@@ -61,5 +70,13 @@ public class UserEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 }
