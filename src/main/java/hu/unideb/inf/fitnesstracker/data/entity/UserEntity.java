@@ -1,10 +1,15 @@
 package hu.unideb.inf.fitnesstracker.data.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -12,6 +17,8 @@ public class UserEntity {
     private String name;
     @Column(name="email_address")
     private String emailAddress;
+    @Column(name="password")
+    private String password;
     @Column(name="address")
     private String address;
     @Column(name="phone")
@@ -23,10 +30,11 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(int id, String name, String emailAddress, String address, String phone, int roleId) {
+    public UserEntity(int id, String name, String emailAddress, String password, String address, String phone, int roleId) {
         this.id = id;
         this.name = name;
         this.emailAddress = emailAddress;
+        this.password = password;
         this.address = address;
         this.phone = phone;
         this.roleId = roleId;
@@ -56,6 +64,10 @@ public class UserEntity {
         this.emailAddress = emailAddress;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -78,5 +90,20 @@ public class UserEntity {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return emailAddress;
     }
 }
