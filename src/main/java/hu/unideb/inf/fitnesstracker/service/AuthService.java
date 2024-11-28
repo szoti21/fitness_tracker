@@ -25,8 +25,11 @@ public class AuthService{
 
     public String registration(RegistrationDto dto) {
         UserEntity userEntity = new UserEntity();
+        userEntity.setName(dto.getName());
         userEntity.setEmailAddress(dto.getEmailAddress());
         userEntity.setPassword(encoder.encode(dto.getPassword()));
+        userEntity.setBirthDate(dto.getBirthDate());
+        userEntity.setPhone(dto.getPhone());
         /*if (role != null) {
             userEntity.setRoles(Set.of(role));
         } else {
@@ -37,7 +40,7 @@ public class AuthService{
 
         userEntity = repo.save(userEntity);
 
-        return jwtService.generateToken(userEntity);
+        return jwtService.generateToken(userEntity, userEntity.getId());
 
     }
 
@@ -46,6 +49,6 @@ public class AuthService{
                 new UsernamePasswordAuthenticationToken(dto.getEmailAddress(),dto.getPassword())
         );
         var user = repo.findByEmailAddress(dto.getEmailAddress());
-        return jwtService.generateToken(user);
+        return jwtService.generateToken(user, user.getId());
     }
 }

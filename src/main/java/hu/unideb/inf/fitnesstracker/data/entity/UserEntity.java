@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -19,8 +20,8 @@ public class UserEntity implements UserDetails {
     private String emailAddress;
     @Column(name="password")
     private String password;
-    @Column(name="address")
-    private String address;
+    @Column(name="birth_date")
+    private Date birthDate;
     @Column(name="phone")
     private String phone;
     @Column(name="role_id")
@@ -30,12 +31,12 @@ public class UserEntity implements UserDetails {
     public UserEntity() {
     }
 
-    public UserEntity(int id, String name, String emailAddress, String password, String address, String phone, int roleId) {
+    public UserEntity(int id, String name, String emailAddress, String password, Date birthDate, String phone, int roleId) {
         this.id = id;
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.address = address;
+        this.birthDate = birthDate;
         this.phone = phone;
         this.roleId = roleId;
     }
@@ -68,12 +69,12 @@ public class UserEntity implements UserDetails {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPhone() {

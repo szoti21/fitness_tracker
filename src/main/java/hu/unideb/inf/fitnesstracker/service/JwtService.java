@@ -22,9 +22,11 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, int id) {
         Map<String, Object> claims = new HashMap<>();
         userDetails.getAuthorities().forEach(authority -> claims.put(authority.getAuthority(), authority));
+
+        claims.put("id", id);
 
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         SecretKey key = Keys.hmacShaKeyFor(keyBytes);
