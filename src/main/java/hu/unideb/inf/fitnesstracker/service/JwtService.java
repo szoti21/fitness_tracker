@@ -1,6 +1,7 @@
 package hu.unideb.inf.fitnesstracker.service;
 
 
+import hu.unideb.inf.fitnesstracker.data.entity.RoleEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -22,12 +23,12 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails, int id) {
+    public String generateToken(UserDetails userDetails, int id, RoleEntity role) {
         Map<String, Object> claims = new HashMap<>();
         userDetails.getAuthorities().forEach(authority -> claims.put(authority.getAuthority(), authority));
 
         claims.put("id", id);
-
+        claims.put("role", role.getRoleName());
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         SecretKey key = Keys.hmacShaKeyFor(keyBytes);
 

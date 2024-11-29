@@ -36,7 +36,7 @@ public class AuthService{
 
         userEntity = repo.save(userEntity);
 
-        return jwtService.generateToken(userEntity, userEntity.getId());
+        return jwtService.generateToken(userEntity, userEntity.getId(), userEntity.getRole());
 
     }
 
@@ -45,6 +45,6 @@ public class AuthService{
                 new UsernamePasswordAuthenticationToken(dto.getEmailAddress(),dto.getPassword())
         );
         var user = repo.findByEmailAddress(dto.getEmailAddress());
-        return jwtService.generateToken(user, user.getId());
+        return jwtService.generateToken(user, user.getId(), user.getRole());
     }
 }

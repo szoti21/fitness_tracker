@@ -2,7 +2,10 @@ package hu.unideb.inf.fitnesstracker.controller;
 
 import hu.unideb.inf.fitnesstracker.data.entity.UserEntity;
 import hu.unideb.inf.fitnesstracker.data.repository.UserRepository;
+import hu.unideb.inf.fitnesstracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +15,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("")
     public List<UserEntity> getUsers(){
@@ -28,8 +34,9 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    @PreAuthorize("hasRole('admin') or @userService.hasId(#id)")
     @PutMapping("/{id}")
-    public UserEntity updateUser(@RequestBody UserEntity user) {
+    public UserEntity updateUser(@PathVariable("id") int id, @RequestBody UserEntity user) {
         if(user.getId() > 0L){
             return userRepository.save(user);
         } else {

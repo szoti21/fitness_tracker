@@ -1,10 +1,16 @@
 package hu.unideb.inf.fitnesstracker.service;
 
+import hu.unideb.inf.fitnesstracker.data.entity.UserEntity;
 import hu.unideb.inf.fitnesstracker.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -16,8 +22,16 @@ public class UserService {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String email) {
-                return repository.findByEmailAddress(email);
+                UserEntity user = repository.findByEmailAddress(email);
+                user.authorities.add(new SimpleGrantedAuthority(user.getRole().getRoleName()));
+                return user;
             }
         };
+    }
+    public boolean hasId(int id){
+        String username =  ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        UserEntity user = repository.findByEmailAddress(username);
+        return user.getId() == id;
+
     }
 }

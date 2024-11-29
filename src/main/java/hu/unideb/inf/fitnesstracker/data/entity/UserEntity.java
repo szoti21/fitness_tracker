@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -30,7 +27,8 @@ public class UserEntity implements UserDetails {
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private RoleEntity role;
 
-
+    @Transient
+    public Collection<GrantedAuthority> authorities = new ArrayList<>();
 
     public UserEntity() {
     }
@@ -98,11 +96,6 @@ public class UserEntity implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
-    }
-
-    @Override
     public String getPassword() {
         return password;
     }
@@ -110,5 +103,10 @@ public class UserEntity implements UserDetails {
     @Override
     public String getUsername() {
         return emailAddress;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        return authorities;
     }
 }
