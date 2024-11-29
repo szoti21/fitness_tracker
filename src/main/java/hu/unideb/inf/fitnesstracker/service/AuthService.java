@@ -1,6 +1,7 @@
 package hu.unideb.inf.fitnesstracker.service;
 
 
+import hu.unideb.inf.fitnesstracker.data.entity.RoleEntity;
 import hu.unideb.inf.fitnesstracker.data.entity.UserEntity;
 import hu.unideb.inf.fitnesstracker.data.repository.UserRepository;
 import hu.unideb.inf.fitnesstracker.service.dto.LoginDto;
@@ -30,13 +31,8 @@ public class AuthService{
         userEntity.setPassword(encoder.encode(dto.getPassword()));
         userEntity.setBirthDate(dto.getBirthDate());
         userEntity.setPhone(dto.getPhone());
-        /*if (role != null) {
-            userEntity.setRoles(Set.of(role));
-        } else {
-            role = new RoleEntity(null, "USER");
-            role = roleRepo.save(role);
-            userEntity.setRole(Set.of(role));
-        }*/
+        userEntity.setRole(new RoleEntity(2, "user"));
+
 
         userEntity = repo.save(userEntity);
 

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,21 +25,23 @@ public class UserEntity implements UserDetails {
     private Date birthDate;
     @Column(name="phone")
     private String phone;
-    @Column(name="role_id")
-    private int roleId;
+
+    @OneToOne()
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    private RoleEntity role;
+
 
 
     public UserEntity() {
     }
 
-    public UserEntity(int id, String name, String emailAddress, String password, Date birthDate, String phone, int roleId) {
+    public UserEntity(int id, String name, String emailAddress, String password, Date birthDate, String phone) {
         this.id = id;
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
         this.birthDate = birthDate;
         this.phone = phone;
-        this.roleId = roleId;
     }
 
     public int getId() {
@@ -85,12 +88,13 @@ public class UserEntity implements UserDetails {
         this.phone = phone;
     }
 
-    public int getRoleId() {
-        return roleId;
+
+    public RoleEntity getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(RoleEntity role) {
+        this.role = role;
     }
 
     @Override

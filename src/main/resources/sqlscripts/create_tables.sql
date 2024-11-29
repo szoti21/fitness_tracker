@@ -5,11 +5,12 @@ CREATE TABLE users (
     password VARCHAR(1000),
     birth_date DATE,
     phone VARCHAR(500),
-    role_id INT not null
+    role_id INT not null,
+    constraint FK_users_role_id foreign key(role_id) references roles(role_id)
     );
 
 CREATE TABLE food (
-    id not null primary key,
+    id INT not null auto_increment primary key,
     food_name VARCHAR(500) unique not null,
     kcal INT,
     protein INT,
@@ -30,10 +31,11 @@ CREATE TABLE biometrics (
     height INT,
     weight INT,
     body_fat INT,
-    primary key(date, user_id)
-    );
+    primary key(date, user_id),
+    constraint FK_biometrics_user_id foreign key(user_id) references users(id)
+);
 
-CREATE TABLE role (
-    role_id INT not null,
+CREATE TABLE roles (
+    role_id INT not null auto_increment primary key,
     role_name VARCHAR(500)
     );
