@@ -34,7 +34,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PreAuthorize("hasRole('admin') or @userService.hasId(#id)")
+    @PreAuthorize("hasAuthority('admin') or @userService.hasId(#id)")
     @PutMapping("/{id}")
     public UserEntity updateUser(@PathVariable("id") int id, @RequestBody UserEntity user) {
         if(user.getId() > 0L){
