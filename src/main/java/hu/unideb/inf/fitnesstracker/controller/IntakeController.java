@@ -26,6 +26,7 @@ public class IntakeController {
     }
     @PostMapping("")
     public IntakeEntity saveIntake(@PathVariable("userId") int userId, @RequestBody IntakeEntity intake){
+        intake.setUserId(userId);
         return intakeRepository.save(intake);
     }
 

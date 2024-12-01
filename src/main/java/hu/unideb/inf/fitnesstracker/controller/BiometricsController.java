@@ -27,6 +27,7 @@ public class BiometricsController {
     }
     @PostMapping("")
     public BiometricsEntity saveBiometrics(@PathVariable("userId") int userId, @RequestBody BiometricsEntity biometrics){
+        biometrics.setUserId(userId);
         return biometricsRepository.save(biometrics);
     }
 
