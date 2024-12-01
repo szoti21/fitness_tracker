@@ -31,9 +31,12 @@ public class BiometricsController {
     }
 
     @PutMapping("/{date}")
+    @Transactional
     public BiometricsEntity updateBiometrics(@PathVariable("userId") int id, @PathVariable("date") Long date, @RequestBody BiometricsEntity biometrics) {
         if(biometrics.getDate() != null){
-            return biometricsRepository.save(biometrics);
+            BiometricsEntity updatedBiometrics = biometricsRepository.save(biometrics);
+            deleteBiometrics(id, date);
+            return updatedBiometrics;
         } else {
             return null;
         }

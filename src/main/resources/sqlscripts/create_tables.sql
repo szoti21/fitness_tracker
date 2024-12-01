@@ -19,7 +19,7 @@ CREATE TABLE food (
     );
 
 CREATE TABLE intake (
-    date DATE,
+    date DATETIME,
     user_id INT not null,
     food_id INT not null,
     quantity INT,

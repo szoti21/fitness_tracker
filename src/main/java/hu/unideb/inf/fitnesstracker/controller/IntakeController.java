@@ -30,9 +30,12 @@ public class IntakeController {
     }
 
     @PutMapping("/{date}")
+    @Transactional
     public IntakeEntity updateIntake(@PathVariable("userId") int id, @PathVariable("date") Long date, @RequestBody IntakeEntity intake) {
         if(intake.getDate() != null){
-            return intakeRepository.save(intake);
+            IntakeEntity updatedIntake = intakeRepository.save(intake);
+            deleteIntake(id, date);
+            return intakeRepository.save(updatedIntake);
         } else {
             return null;
         }
