@@ -20,9 +20,12 @@ CREATE TABLE food (
 
 CREATE TABLE intake (
     date DATE,
-    user_id INT,
-    food_id INT,
-    quantity INT
+    user_id INT not null,
+    food_id INT not null,
+    quantity INT,
+    primary key(date, user_id),
+    constraint FK_intake_user_id foreign key(user_id) references users(id),
+    constraint FK_intake_food_id foreign key(food_id) references food(id)
     );
 
 CREATE TABLE biometrics (
