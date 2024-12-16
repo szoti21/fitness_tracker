@@ -3,6 +3,7 @@ package hu.unideb.inf.fitnesstracker.controller;
 import hu.unideb.inf.fitnesstracker.data.entity.RoleEntity;
 import hu.unideb.inf.fitnesstracker.data.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,11 +25,13 @@ public class RoleController {
         return roleRepository.findById(roleId).orElse(null);
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @PostMapping("")
     public RoleEntity saveRole(@RequestBody RoleEntity role){
         return roleRepository.save(role);
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @PutMapping("/{roleId}")
     public RoleEntity updateRole(@RequestBody RoleEntity role) {
         if(role.getRoleId() > 0L){
@@ -38,6 +41,7 @@ public class RoleController {
         }
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @DeleteMapping("/{roleId}")
     public void deleteRole(@PathVariable("roleID") int roleId){
         roleRepository.deleteById(roleId);
