@@ -40,7 +40,7 @@ public class IntakeController {
     @Transactional
     public IntakeEntity updateIntake(@PathVariable("userId") int userId, @PathVariable("date") Long date, @RequestBody IntakeEntity intake) {
         if(intake.getDate() != null){
-            IntakeEntity updatedIntake = intakeRepository.save(intake);
+            IntakeEntity updatedIntake = intake;
             deleteIntake(userId, date);
             return intakeRepository.save(updatedIntake);
         } else {
