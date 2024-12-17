@@ -13,9 +13,9 @@ CREATE TABLE food (
     id INT not null auto_increment primary key,
     food_name VARCHAR(500) unique not null,
     kcal INT,
-    protein INT,
-    fat INT,
-    carbohydrates INT
+    protein FLOAT,
+    fat FLOAT,
+    carbohydrates FLOAT
     );
 
 CREATE TABLE intake (

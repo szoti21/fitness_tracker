@@ -19,18 +19,19 @@ public class FoodEntity {
     private int kcal;
 
     @Column(name="protein")
-    private int protein;
+    private float protein;
 
     @Column(name="fat")
-    private int fat;
+    private float fat;
 
     @Column(name="carbohydrates")
-    private int carbohydrates;
+    private float carbohydrates;
 
     public FoodEntity() {
     }
 
-    public FoodEntity(String foodName, int kcal, int protein, int fat, int carbohydrates) {
+    public FoodEntity(int id, String foodName, int kcal, float protein, float fat, float carbohydrates) {
+        this.id = id;
         this.foodName = foodName;
         this.kcal = kcal;
         this.protein = protein;
@@ -62,27 +63,27 @@ public class FoodEntity {
         this.kcal = kcal;
     }
 
-    public int getProtein() {
+    public float getProtein() {
         return protein;
     }
 
-    public void setProtein(int protein) {
+    public void setProtein(float protein) {
         this.protein = protein;
     }
 
-    public int getFat() {
+    public float getFat() {
         return fat;
     }
 
-    public void setFat(int fat) {
+    public void setFat(float fat) {
         this.fat = fat;
     }
 
-    public int getCarbohydrates() {
+    public float getCarbohydrates() {
         return carbohydrates;
     }
 
-    public void setCarbohydrates(int carbohydrates) {
+    public void setCarbohydrates(float carbohydrates) {
         this.carbohydrates = carbohydrates;
     }
 
