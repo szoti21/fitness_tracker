@@ -8,7 +8,7 @@ A backend service for the Fitness Tracker application, built with Java Spring. T
 - **User Authentication**: Secure login and registration with Spring Security.
 - **Track Body Metrics**: Record and retrieve weight and body fat changes over time.
 - **Food Intake Tracker**: Log foods eaten and calculate their nutritional breakdown (protein, fat, carbs, and kcal).
-- **RESTful APIs**: Clean, well-documented endpoints for interaction with the frontend.
+- **RESTful APIs**: Clean, endpoints for interaction with the frontend.
 
 ---
 
