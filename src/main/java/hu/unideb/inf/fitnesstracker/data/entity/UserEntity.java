@@ -23,7 +23,7 @@ public class UserEntity implements UserDetails {
     @Column(name="phone")
     private String phone;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private RoleEntity role;
 

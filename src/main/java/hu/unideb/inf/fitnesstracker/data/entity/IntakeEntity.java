@@ -14,7 +14,7 @@ public class IntakeEntity {
     @Id
     @Column(name="user_id")
     private int userId;
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "food_id", referencedColumnName = "id")
     private FoodEntity food;
     @Column(name="quantity")

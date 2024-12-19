@@ -1,8 +1,11 @@
 package hu.unideb.inf.fitnesstracker.controller;
 
 import hu.unideb.inf.fitnesstracker.data.entity.UserEntity;
+import hu.unideb.inf.fitnesstracker.data.repository.BiometricsRepository;
+import hu.unideb.inf.fitnesstracker.data.repository.IntakeRepository;
 import hu.unideb.inf.fitnesstracker.data.repository.UserRepository;
 import hu.unideb.inf.fitnesstracker.service.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +21,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BiometricsRepository biometricsRepository;
+
+    @Autowired
+    private IntakeRepository intakeRepository;
 
     @PreAuthorize("hasAuthority('admin')")
     @GetMapping("")
@@ -50,8 +59,12 @@ public class UserController {
         }
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @DeleteMapping("/{id}")
+    @Transactional
     public void deleteUser(@PathVariable("id") int id){
+        intakeRepository.deleteAllByUserId(id);
+        biometricsRepository.deleteAllByUserId(id);
         userRepository.deleteById(id);
     }
 }

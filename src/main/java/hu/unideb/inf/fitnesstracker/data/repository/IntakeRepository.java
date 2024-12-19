@@ -12,4 +12,6 @@ public interface IntakeRepository extends JpaRepository<IntakeEntity, Integer> {
     List<IntakeEntity> findByUserIdOrderByDate(int userId);
     IntakeEntity findByUserIdAndDate(int userId, Date date);
     void deleteByUserIdAndDate(int userId, Date date);
+    void deleteAllByFoodId(int id);
+    void deleteAllByUserId(int id);
 }

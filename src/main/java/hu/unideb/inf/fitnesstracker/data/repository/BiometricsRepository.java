@@ -12,4 +12,5 @@ public interface BiometricsRepository extends JpaRepository<BiometricsEntity, In
     List<BiometricsEntity> findByUserIdOrderByDate(int userId);
     BiometricsEntity findByUserIdAndDate(int userId, Date date);
     void deleteByUserIdAndDate(int userId, Date date);
+    void deleteAllByUserId(int id);
 }
